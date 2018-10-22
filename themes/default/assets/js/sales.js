@@ -1453,7 +1453,7 @@ if (slwarehouse = __getItem('slwarehouse')) {
 		}
 		var request_quantity = $("#request_quantity").val();
 		var cur_stock_qty = $("#cur_stock_qty").val();
-	    var price	= parseFloat($('#pprice_show').val());
+	    var price	= parseFloat($('#pprice').val());
 	    var cost	= parseFloat($('#pcost').val());
 		var opt_cur = $("#pgroup_price option:selected").attr('rate');
 		if(opt_cur == undefined)

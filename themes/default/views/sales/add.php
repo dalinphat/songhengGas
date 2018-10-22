@@ -1256,6 +1256,7 @@
                         </tr>
                     </table>
                     <input type="hidden" id="punit_price" value=""/>
+                    <input type="hidden" id="pprice_show" value=""/>
                     <input type="hidden" id="old_tax" value=""/>
                     <input type="hidden" id="old_qty" value=""/>
                     <input type="hidden" id="old_price" value=""/>

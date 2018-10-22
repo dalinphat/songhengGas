@@ -613,7 +613,7 @@
                                             <i class="fa fa-plus-circle"></i>
                                             <span class="text"> <?= lang('add_pos_sale'); ?></span>
                                         </a>
-                                    	</li><li id="sale_order_list_sale_order">
+                                    	<!--</li><li id="sale_order_list_sale_order">
 										<a class="submenu" href="<?= site_url('sale_order/list_sale_order'); ?>">
 											<i class="fa fa-heart"></i>
 											<span class="text"> <?= lang('list_sales_order'); ?></span>
@@ -624,7 +624,7 @@
 												<i class="fa fa-plus-circle"></i>
 												<span class="text"> <?= lang('add_sale_order'); ?></span>
 											</a>
-										</li>
+										</li>-->
 										<li id="sales_index">
 											<a class="submenu" href="<?= site_url('sales'); ?>">
 												<i class="fa fa-heart"></i>

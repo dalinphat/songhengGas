@@ -6972,7 +6972,7 @@ WHERE
 
             $return_surcharge   = $this->input->post('return_surcharge') ? $this->input->post('return_surcharge') : 0;
             $note               = $this->erp->clear_tags($this->input->post('note'));
-			$shipping           = $this->input->post('shipping');
+            $shipping           = $this->input->post('shipping');
             $total              = 0;
             $product_tax        = 0;
             $order_tax          = 0;
@@ -6984,7 +6984,7 @@ WHERE
                 $item_id        = $_POST['product_id'][$r];
                 $item_type      = $_POST['product_type'][$r];
                 $item_code      = $_POST['product_code'][$r];
-				$item_cost      = $_POST['product_cost'][$r];
+                $item_cost      = $_POST['product_cost'][$r];
                 $item_name      = $_POST['product_name'][$r];
                 $sale_item_id   = $_POST['sale_item_id'][$r];
                 $piece          = $_POST['piece'][$r];
@@ -6992,7 +6992,7 @@ WHERE
                 $item_option    = isset($_POST['product_option'][$r]) && $_POST['product_option'][$r] != 'false' ? $_POST['product_option'][$r] : NULL;
                 $expire_date_id = isset($_POST['expiry_id'][$r]) && $_POST['expiry_id'][$r] != 'false' ? $_POST['expiry_id'][$r] : null;
                 $expdate 		= isset($_POST['expiry_date'][$r]) && $_POST['expiry_date'][$r] != 'false' ? $_POST['expiry_date'][$r] : null;
-				$real_unit_price= $this->erp->formatDecimal($_POST['real_unit_price'][$r]);
+                $real_unit_price= $this->erp->formatDecimal($_POST['real_unit_price'][$r]);
                 $unit_price     = $this->erp->formatDecimal($_POST['unit_price'][$r]);
                 $item_quantity  = $_POST['quantity'][$r];
                 $item_serial    = isset($_POST['serial'][$r]) ? $_POST['serial'][$r] : '';
@@ -7002,7 +7002,7 @@ WHERE
                 if (isset($item_code) && isset($real_unit_price) && isset($unit_price) && isset($item_quantity)) {
                     $product_details = $item_type != 'manual' ? $this->sales_model->getProductByCode($item_code) : NULL;
 
-					if (isset($item_discount)) {
+                    if (isset($item_discount)) {
                         $discount   = $item_discount;
                         $dpos       = strpos($discount, $percentage);
                         if ($dpos !== false) {
@@ -7058,7 +7058,7 @@ WHERE
                         'option_id'         => $item_option,
                         'net_unit_price'    => $item_net_price,
                         'unit_price'        => $this->erp->formatDecimal($unit_price),
-						'unit_cost'         => $item_cost,
+                        'unit_cost'         => $item_cost,
                         'quantity'          => $item_quantity,
                         'warehouse_id'      => $sale->warehouse_id,
                         'item_tax'          => $pr_item_tax,
@@ -7070,16 +7070,16 @@ WHERE
                         'serial_no'         => $item_serial,
                         'real_unit_price'   => $real_unit_price,
                         'sale_item_id'      => $sale_item_id,
-						'piece'             => $piece,
-						'wpiece'            => $wpiece,
-						'expiry' 			=> $expdate,
-						'expiry_id' 		=> $expire_date_id
+                        'piece'             => $piece,
+                        'wpiece'            => $wpiece,
+                        'expiry' 			=> $expdate,
+                        'expiry_id' 		=> $expire_date_id
                     );
 
                     $total += $subtotal;
                 }
             }
-			
+
             if (empty($products)) {
                 $this->form_validation->set_rules('product', lang("order_items"), 'required');
             } else {
@@ -7094,7 +7094,7 @@ WHERE
                 if ($opos !== false) {
                     $ods = explode("%", $order_discount_id);
                     //$order_discount = $this->erp->formatDecimal((($paid_amount + $product_tax) * (Float)($ods[0])) / 100);
-					$order_discount = $this->erp->formatDecimal(((($total + $product_tax) * (Float) ($ods[0])) / 100), 4);
+                    $order_discount = $this->erp->formatDecimal(((($total + $product_tax) * (Float) ($ods[0])) / 100), 4);
                 } else {
                     $order_discount = $this->erp->formatDecimal(($total * $order_discount_id) / 100);
                 }
@@ -7118,9 +7118,9 @@ WHERE
 
             $total_tax = $this->erp->formatDecimal($product_tax + $order_tax);
             //$grand_total = $this->erp->formatDecimal($paid_amount);
-			$grand_total = $this->erp->formatDecimal(($total + $order_tax + $this->erp->formatDecimal($shipping) - $order_discount), 4);
+            $grand_total = $this->erp->formatDecimal(($total + $order_tax + $this->erp->formatDecimal($shipping) - $order_discount), 4);
             $data = array(
-				'date' 				=> $date,
+                'date' 				=> $date,
                 'sale_id' 			=> $id,
                 'reference_no' 		=> $reference,
                 'customer_id' 		=> $sale->customer_id,
@@ -7138,10 +7138,10 @@ WHERE
                 'order_tax_id' 		=> $order_tax_id,
                 'order_tax' 		=> $order_tax,
                 'total_tax' 		=> $total_tax,
-				'shipping' 			=> $shipping,
+                'shipping' 			=> $shipping,
                 'surcharge' 		=> $this->erp->formatDecimal($return_surcharge),
                 'grand_total' 		=> $this->erp->formatDecimal($grand_total),
-				'paid' 				=> $this->erp->formatDecimal($this->input->post('amount-paid')),
+                'paid' 				=> $this->erp->formatDecimal($this->input->post('amount-paid')),
                 'created_by' 		=> $this->session->userdata('user_id')
             );
 
@@ -7162,8 +7162,8 @@ WHERE
                     'created_by'    => $this->session->userdata('user_id'),
                     'type'          => 'returned',
                     'biller_id'     => $sale->biller_id ? $sale->biller_id : $this->default_biller_id,
-					'add_payment'   => '0',
-					'bank_account'  => $this->input->post('bank_account')
+                    'add_payment'   => '0',
+                    'bank_account'  => $this->input->post('bank_account')
                 );
             } else {
                 $payment = array();
@@ -7185,23 +7185,24 @@ WHERE
                 $photo = $this->upload->file_name;
                 $data['attachment'] = $photo;
             }
+            //$this->erp->print_arrays($data, $products);
         }
 
         if ($this->form_validation->run() == true && $return_id = $this->sales_model->returnSale($data, $products, $payment)) {
             optimizeSaleReturn(date('Y-m-d', strtotime($date)));
             $this->session->set_flashdata('message', lang("return_sale_added"));
-			redirect("sales/invoice_return_set/".$return_id);
+            redirect("sales/invoice_return_set/".$return_id);
         } else {
 
             $this->data['error'] = (validation_errors() ? validation_errors() : $this->session->flashdata('error'));
-			$inv                = $this->sales_model->getInvoiceByID($id);
-			$return             = $this->sales_model->getReturnSaleBySID($id);
-			$discount           = $this->sales_model->getSaleDiscounts($id);
-			$inv->refunded      = $return->refunded;
-			$inv->paid          = $inv->paid - $discount;
+            $inv                = $this->sales_model->getInvoiceByID($id);
+            $return             = $this->sales_model->getReturnSaleBySID($id);
+            $discount           = $this->sales_model->getSaleDiscounts($id);
+            $inv->refunded      = $return->refunded;
+            $inv->paid          = $inv->paid - $discount;
             $this->data['inv']  = $inv;
             $inv_items          = $this->sales_model->getAllInvoiceReItems($id);
-			$qty_balance        = $this->sales_model->getQuantityBalanceBySaleID($id);
+            $qty_balance        = $this->sales_model->getQuantityBalanceBySaleID($id);
             if ($this->data['inv']->sale_status == 'returned' && $qty_balance->quantity <= 0) {
                 $this->session->set_flashdata('error', lang("sale_status_x_competed"));
                 redirect($_SERVER["HTTP_REFERER"]);
@@ -7229,21 +7230,21 @@ WHERE
                 $row->name          = $item->product_name;
                 $row->type          = $item->product_type;
                 $row->qty           = $item->bqty;
-				$row->bqty          = $item->bqty;
+                $row->bqty          = $item->bqty;
                 $row->oqty          = $item->quantity;
                 $row->discount      = $item->discount ? $item->discount : '0';
                 $row->item_discount = $item->item_discount ? $item->item_discount : '0';
                 $row->price         = $this->erp->formatDecimal($item->net_unit_price+$this->erp->formatDecimal($item->item_discount/$item->bqty));
                 $row->unit_price    = $row->tax_method ? $item->unit_price+$this->erp->formatDecimal($item->item_discount/$item->bqty)+$this->erp->formatDecimal($item->item_tax/$item->bqty) : $item->unit_price+($item->item_discount/$item->bqty);
                 $row->real_unit_price = $item->real_unit_price;
-				$row->cost          = $row->cost;
-				$row->expiry        = $item->expiry ? $item->expiry : '';
-				$row->expiry_id     = $item->expiry_id ? $item->expiry_id : '';
+                $row->cost          = $row->cost;
+                $row->expiry        = $item->expiry ? $item->expiry : '';
+                $row->expiry_id     = $item->expiry_id ? $item->expiry_id : '';
                 $row->tax_rate      = $item->tax_rate_id;
                 $row->serial        = $item->serial_no;
                 $row->option        = $item->option_id;
-				$row->piece         = (($item->piece > 0) ? $item->piece : 0);
-				$row->wpiece        = (($item->wpiece > 0) ? $item->wpiece : 1);
+                $row->piece         = (($item->piece > 0) ? $item->piece : 0);
+                $row->wpiece        = (($item->wpiece > 0) ? $item->wpiece : 1);
                 $options            = $this->sales_model->getProductOptions($row->id, $item->warehouse_id, TRUE);
                 $ri = $this->Settings->item_addition ? $row->id : $c;
                 if ($row->tax_rate) {
@@ -7257,25 +7258,25 @@ WHERE
 
             $this->data['inv_items']    = json_encode($pr);
             $this->data['id']           = $id;
-			$this->data['billers']      = $this->site->getAllCompanies('biller');
+            $this->data['billers']      = $this->site->getAllCompanies('biller');
             $this->data['warehouses']   = $this->site->getAllWarehouses();
             $this->data['tax_rates']    = $this->site->getAllTaxRates();
-			$this->data['agencies']     = $this->site->getAllUsers();
-			$this->data['customers']    = $this->site->getCustomers();
-			$this->data['currency']     = $this->site->getCurrency();
+            $this->data['agencies']     = $this->site->getAllUsers();
+            $this->data['customers']    = $this->site->getCustomers();
+            $this->data['currency']     = $this->site->getCurrency();
             $this->data['reference']    = $this->site->getReference('re', $inv->biller_id);
             $this->data['payment_ref']  = $this->site->getReference('pp', $inv->biller_id);
             $this->data['deposit_ref']  = $this->site->getReference('sp', $inv->biller_id);
-			$this->data['tax_rates']    = $this->site->getAllTaxRates();
-			$this->data['setting']      = $this->site->get_setting();
-			$this->data['bankAccounts'] = $this->site->getAllBankAccounts();
+            $this->data['tax_rates']    = $this->site->getAllTaxRates();
+            $this->data['setting']      = $this->site->get_setting();
+            $this->data['bankAccounts'] = $this->site->getAllBankAccounts();
             $bc = array(array('link' => base_url(), 'page' => lang('home')), array('link' => site_url('sales'), 'page' => lang('sales')), array('link' => '#', 'page' => lang('return_sale')));
             $meta = array('page_title' => lang('return_sale'), 'bc' => $bc);
             $this->page_construct('sales/return_sale', $meta, $this->data);
         }
     }
 
-	function add_return($quote_id = NULL)
+    function add_return($quote_id = NULL)
     {
         $this->erp->checkPermissions('return_sales',null,'sales');
 

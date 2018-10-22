@@ -20,6 +20,72 @@
 			<?php } ?>
 		});
 
+    /* -----------------------
+	 * Edit Row Modal Hanlder
+	 ----------------------- */
+    $(document).on('click', '.edit', function () {
+        var row     = $(this).closest('tr');
+        var row_id  = row.attr('id');
+        var qty     = row.children().children('.rquantity').val();
+        var unit_price  = row.children().children('.realuprice').val();
+        item_id     = row.attr('data-item-id');
+        item        = reitems[item_id];
+        $('#prModalLabel').text(item.row.name + ' (' + item.row.code + ')');
+        var opt     = '<p style="margin: 12px 0 0 0;">n/a</p>';
+        if(item.options) {
+            opt = $("<select id=\"poption\" name=\"poption\" class=\"form-control select\" />");
+
+            $.each(item.options, function () {
+                $("<option />", {value: this.id, text: this.name}).attr("rate",item.row.cost).attr("qty_unit",this.qty_unit).appendTo(opt);
+            });
+        }
+        $('#poptions-div').html(opt);
+        $('select.select').select2({minimumResultsForSearch: 6});
+        $('#pquantity').val(qty);
+        $('#poption').select2('val', item.row.option);
+        $('#pprice_show').val(parseFloat(unit_price).toFixed(2));
+        $('#row_id').val(row_id);
+        $('#prModal').appendTo("body").modal('show');
+    });
+
+    $(document).on('change', '#poption', function () {
+        var row     = $('#' + $('#row_id').val());
+        var item_id = row.attr('data-item-id');
+        var item    = reitems[item_id];
+        var opt     = $(this).val();
+        if (item.options !== false) {
+            $.each(item.options, function () {
+                if(this.id == opt) {
+                    var price   = parseFloat(this.price);
+                    var cost    = parseFloat(this.cost);
+
+                    $('#pprice').val(price);
+                    $('#pcost').val(cost);
+                    $('#pprice_show').val(formatDecimal(price));
+                }
+
+            });
+        }
+    });
+
+    /* -----------------------
+	 * Edit Row Method
+	 ----------------------- */
+    $(document).on('click', '#editItem', function () {
+        var row = $('#' + $('#row_id').val());
+        var item_id = row.attr('data-item-id');
+        var price	= parseFloat($('#pprice_show').val());
+
+        reitems[item_id].row.qty = parseFloat($('#pquantity').val());
+        reitems[item_id].row.real_unit_price = price;
+        reitems[item_id].row.option = $('#poption').val() ? $('#poption').val() : '';
+
+        __setItem('reitems', JSON.stringify(reitems));
+        $('#prModal').modal('hide');
+
+        loadItems();
+    });
+
     $(document).ready(function () {
         <?php if ($inv) { ?>
         //__setItem('redate', '<?= $this->erp->hrld($inv->date) ?>');
@@ -472,7 +538,7 @@
 				item_ds 		= item.row.discount, 
 				expiry_date 	= item.row.expiry, 
 				expiry_id 		= item.row.expiry_id, 
-				item_discount 	= 0, item_option = item.row.option, 
+				item_discount 	= 0,
 				item_code 		= item.row.code, item_serial = item.row.serial, 
 				item_name 		= item.row.name.replace(/"/g, "&#034;").replace(/'/g, "&#039;");
 				var real_unit_price = Number(item.row.real_unit_price);
@@ -535,13 +601,13 @@
                 
                 if(site.settings.show_code == 1 && site.settings.separate_code == 1) {
 					tr_html+='<td class="text-left"><span class="text-left">'+ item_code +'</span></td>';
-					tr_html += '<td><input name="sale_item_id[]" type="hidden" class="rsiid" value="' + sale_item_id + '"><input name="product_id[]" type="hidden" class="rid" value="' + product_id + '"><input name="product_cost[]" type="hidden" class="product_cost" value="' + item.row.cost + '"><input name="product_type[]" type="hidden" class="rtype" value="' + item_type + '"><input name="product_code[]" type="hidden" class="rcode" value="' + item_code + '"><input name="product_name[]" type="hidden" class="rname" value="' + item_name + '"><input name="product_option[]" type="hidden" class="roption" value="' + item_option + '"><input name="product_note[]" type="hidden" class="rnote" value="' + pn + '"><span class="sname" id="name_' + row_no + '">' + item_name + ''+(sel_opt != '' ? ' ('+sel_opt+')' : '')+'</span></td>';
+					tr_html += '<td><input name="sale_item_id[]" type="hidden" class="rsiid" value="' + sale_item_id + '"><input name="product_id[]" type="hidden" class="rid" value="' + product_id + '"><input name="product_cost[]" type="hidden" class="product_cost" value="' + item.row.cost + '"><input name="product_type[]" type="hidden" class="rtype" value="' + item_type + '"><input name="product_code[]" type="hidden" class="rcode" value="' + item_code + '"><input name="product_name[]" type="hidden" class="rname" value="' + item_name + '"><input name="product_option[]" type="hidden" class="roption" value="' + item_option + '"><input name="product_note[]" type="hidden" class="rnote" value="' + pn + '"><span class="sname" id="name_' + row_no + '">' + item_name + ''+(sel_opt != '' ? ' ('+sel_opt+')' : '')+'</span><i class="pull-right fa fa-edit tip pointer edit" id="' + row_no + '" data-item="' + item_id + '" title="Edit" style="cursor:pointer;"></td>';
 				}
 				if(site.settings.show_code == 1 && site.settings.separate_code == 0) {
-					tr_html += '<td><input name="sale_item_id[]" type="hidden" class="rsiid" value="' + sale_item_id + '"><input name="product_id[]" type="hidden" class="rid" value="' + product_id + '"><input name="product_type[]" type="hidden" class="rtype" value="' + item_type + '"><input name="product_code[]" type="hidden" class="rcode" value="' + item_code + '"><input name="product_name[]" type="hidden" class="rname" value="' + item_name + '"><input name="product_option[]" type="hidden" class="roption" value="' + item_option + '"><input name="product_note[]" type="hidden" class="rnote" value="' + pn + '"><span class="sname" id="name_' + row_no + '">' + item_name + ''+(sel_opt != '' ? ' ('+sel_opt+')' : '')+'</span></td>';
+					tr_html += '<td><input name="sale_item_id[]" type="hidden" class="rsiid" value="' + sale_item_id + '"><input name="product_id[]" type="hidden" class="rid" value="' + product_id + '"><input name="product_type[]" type="hidden" class="rtype" value="' + item_type + '"><input name="product_code[]" type="hidden" class="rcode" value="' + item_code + '"><input name="product_name[]" type="hidden" class="rname" value="' + item_name + '"><input name="product_option[]" type="hidden" class="roption" value="' + item_option + '"><input name="product_note[]" type="hidden" class="rnote" value="' + pn + '"><span class="sname" id="name_' + row_no + '">' + item_name + ''+(sel_opt != '' ? ' ('+sel_opt+')' : '')+'</span><i class="pull-right fa fa-edit tip pointer edit" id="' + row_no + '" data-item="' + item_id + '" title="Edit" style="cursor:pointer;"></td>';
 				}
 				if(site.settings.show_code == 0) {
-					tr_html += '<td><input name="sale_item_id[]" type="hidden" class="rsiid" value="' + sale_item_id + '"><input name="product_id[]" type="hidden" class="rid" value="' + product_id + '"><input name="product_type[]" type="hidden" class="rtype" value="' + item_type + '"><input name="product_code[]" type="hidden" class="rcode" value="' + item_code + '"><input name="product_name[]" type="hidden" class="rname" value="' + item_name + '"><input name="product_option[]" type="hidden" class="roption" value="' + item_option + '"><input name="product_note[]" type="hidden" class="rnote" value="' + pn + '"><span class="sname" id="name_' + row_no + '">' + item_name + ''+(sel_opt != '' ? ' ('+sel_opt+')' : '')+'</span></td>';
+					tr_html += '<td><input name="sale_item_id[]" type="hidden" class="rsiid" value="' + sale_item_id + '"><input name="product_id[]" type="hidden" class="rid" value="' + product_id + '"><input name="product_type[]" type="hidden" class="rtype" value="' + item_type + '"><input name="product_code[]" type="hidden" class="rcode" value="' + item_code + '"><input name="product_name[]" type="hidden" class="rname" value="' + item_name + '"><input name="product_option[]" type="hidden" class="roption" value="' + item_option + '"><input name="product_note[]" type="hidden" class="rnote" value="' + pn + '"><span class="sname" id="name_' + row_no + '">' + item_name + ''+(sel_opt != '' ? ' ('+sel_opt+')' : '')+'</span><i class="pull-right fa fa-edit tip pointer edit" id="' + row_no + '" data-item="' + item_id + '" title="Edit" style="cursor:pointer;"></td>';
 				}
 				if(site.settings.product_expiry == 1) {
 					tr_html += '<td class="text-center"><input class="form-control input-sm text-center expiry_date" name="expiry_date[]" type="hidden" id="expiry_date_' + row_no + '" value="' + expiry_date + '"><input name="expiry_id[]" type="hidden" class="expiry_id" value="' + expiry_id + '"><span class="text-center" style="text-align:center !important;" id="expiry_date_' + row_no + '">' + expiry_date + '</span></td>';
@@ -920,7 +986,7 @@
 											<?php if($setting->product_expiry) { ?>
 												<th class="col-md-1"><?= lang("expiry_date"); ?></th>
 											<?php } ?>
-                                            <th class="col-md-1"><?= lang("net_unit_price"); ?></th>
+                                            <th class="col-md-1"><?= lang("unit_price"); ?></th>
                                             <th class="col-md-1"><?= lang("piece"); ?></th>
                                             <th class="col-md-1"><?= lang("wpiece"); ?></th>
                                             <th class="col-md-1"><?= lang("quantity"); ?></th>
@@ -1221,55 +1287,46 @@
     </div>
 </div>
 
-<div class="modal" id="gcModal" tabindex="-1" role="dialog" aria-labelledby="mModalLabel" aria-hidden="true">
+<div class="modal" id="prModal" tabindex="-1" role="dialog" aria-labelledby="prModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i
-                        class="fa fa-2x">&times;</i></button>
-                <h4 class="modal-title" id="myModalLabel"><?= lang('sell_gift_card'); ?></h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true"><i
+                                class="fa fa-2x">&times;</i></span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="prModalLabel"></h4>
             </div>
-            <div class="modal-body">
-                <p><?= lang('enter_info'); ?></p>
-
-                <div class="alert alert-danger gcerror-con" style="display: none;">
-                    <button data-dismiss="alert" class="close" type="button">×</button>
-                    <span id="gcerror"></span>
-                </div>
-                <div class="form-group">
-                    <?= lang("card_no", "gccard_no"); ?> *
-                    <div class="input-group">
-                        <?php echo form_input('gccard_no', '', 'class="form-control" id="gccard_no" onClick="this.select();"'); ?>
-                        <div class="input-group-addon" style="padding-left: 10px; padding-right: 10px;"><a href="#"
-                                                                                                           id="genNo"><i
-                                    class="fa fa-cogs"></i></a></div>
+            <div class="modal-body" id="pr_popover_content">
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label for="pquantity" class="col-sm-4 control-label"><?= lang('quantity') ?></label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="pquantity">
+                            <input type="hidden" class="form-control" id="request_quantity">
+                            <input type="hidden" class="form-control" id="cur_stock_qty">
+                        </div>
                     </div>
-                </div>
-                <input type="hidden" name="gcname" value="<?= lang('gift_card') ?>" id="gcname"/>
+                    <div class="form-group">
+                        <label for="poption" class="col-sm-4 control-label"><?= lang('product_option') ?></label>
 
-                <div class="form-group">
-                    <?= lang("value", "gcvalue"); ?> *
-                    <?php echo form_input('gcvalue', '', 'class="form-control" id="gcvalue"'); ?>
-                </div>
-                <div class="form-group">
-                    <?= lang("customer", "gccustomer"); ?>
-                    <div class="input-group">
-                        <?php echo form_input('gccustomer', '', 'class="form-control" id="gccustomer"'); ?>
-                        <div class="input-group-addon" style="padding-left: 10px; padding-right: 10px;"><a href="#"
-                                                                                                           id="noCus"
-                                                                                                           class="tip"
-                                                                                                           title="<?= lang('unselect_customer') ?>"><i
-                                    class="fa fa-times"></i></a></div>
+                        <div class="col-sm-8">
+                            <div id="poptions-div"></div>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <?= lang("expiry_date", "gcexpiry"); ?>
-                    <?php echo form_input('gcexpiry', '', 'class="form-control date" id="cgexpiry"'); ?>
-                </div>
+                    <div class="form-group">
+                        <label for="pprice" class="col-sm-4 control-label"><?= lang('unit_price') ?></label>
 
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="pprice_show">
+                            <input type="hidden" class="form-control" id="pprice">
+                            <input type="hidden" class="form-control" id="pcost">
+                            <input type="hidden" class="form-control" id="curr_rate">
+                        </div>
+                    </div>
+                    <input type="hidden" id="row_id" value=""/>
+                </form>
             </div>
             <div class="modal-footer">
-                <button type="button" id="addGiftCard" class="btn btn-primary"><?= lang('sell_gift_card') ?></button>
+                <button type="button" class="btn btn-primary" id="editItem"><?= lang('submit') ?></button>
             </div>
         </div>
     </div>
