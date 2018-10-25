@@ -1890,7 +1890,7 @@ class Products extends MY_Controller
                     }
                     fclose($handle);
                 }
-                
+                //$this->erp->print_arrays($arrResult);
                 $titles = array_shift($arrResult);
 
                 $keys = array('code', 'price','cost', 'variant');
