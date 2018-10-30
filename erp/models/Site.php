@@ -1469,13 +1469,15 @@ class Site extends CI_Model
 
     public function getReference($field, $biller = null)
     {
+        //$this->erp->print_arrays($this->get_setting()->separate_ref );
 		$biller_prefix = false;
 		if($this->get_setting()->separate_ref == 1){
 			$biller_prefix = true;
 			if($biller){
 				$condition = array('DATE_FORMAT(date,"%Y-%m")' => date('Y-m'),'biller_id'=>json_decode($biller));
+                //$this->erp->print_arrays($condition);
 				if ($this->Settings->reference_format == 4 || $this->Settings->reference_format == 5) {
-					$q = $this->db->get_where('order_ref', array('biller_id'=> JSON_decode($biller)), 1);
+					$q = $this->db->get_where('order_ref0', array('biller_id'=> JSON_decode($biller)), 1);
 				} elseif($this->Settings->reference_format == 2) {
 					$this->db
 						 ->select('order_ref.*')

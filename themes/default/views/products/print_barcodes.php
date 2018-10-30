@@ -223,8 +223,6 @@
                             }elseif ($style != 50) {
                                 echo '<div class="barcode">';
                             }
-                          // echo '<h1>'.$this->input->post('type').'</h1>';
-//                            $this->erp->print_arrays($barcodes);
                             foreach ($barcodes as $item) {
 
                                 if($style == 90 && $item['image'])
@@ -411,9 +409,10 @@
                                         $table.='
                                                 <table class="text-center tb_bor " style="margin: 0px auto; width: 56mm;height: 26mm;page-break-after: always">
                                                     <tr>
-                                                        <td rowspan="2"  class="rotate_r rotate1_r">
+                                                        <!--<td rowspan="2"  class="rotate_r rotate1_r">
                                                         <div style="font-size:13px">
-                                                        '.strtoupper($item['biller']).'</div></td>
+                                                        '.strtoupper($item['biller']).'</div>
+                                                        </td>-->
                                                         <td>
                                                             <div style="font-size: 10px;">
                                                             <b>'.$item['name'].'</b>
@@ -953,7 +952,7 @@
                 tr_html += '<td><input class="form-control quantity text-center" name="quantity[]" type="text" value="' + formatDecimal(item.qty) + '" data-id="' + row_no + '" data-item="' + item_id + '" id="quantity_' + row_no + '" onClick="this.select();"></td>';
                 if(item.variants) {
                     $.each(item.variants, function () {
-                        vd += '<input name="varss[]" type="checkbox" class="checkbox" id="' + this.id + '" data-item-id="' + item_id + '" value="' + this.id + '" ' + (item.selected_variants[this.id] == 1 ? 'checked="checked"' : '') + ' style="display:inline-block;" /><input type="hidden" class="roption" value="' + this.id + '"><label for="' + this.id + '" class="padding05">' + this.name + '</label>';
+                        vd += '<input name="vars[]" type="checkbox" class="checkbox" id="' + this.id + '" data-item-id="' + item_id + '" value="' + this.id + '" ' + (item.selected_variants[this.id] == 1 ? 'checked="checked"' : '') + ' style="display:inline-block;" /><input type="hidden" class="roption" value="' + this.id + '"><label for="' + this.id + '" class="padding05">' + this.name + '</label>';
                     });
                 }
 

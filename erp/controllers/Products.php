@@ -680,47 +680,50 @@ class Products extends MY_Controller
         $this->load->view($this->theme . 'products/single_label2', $this->data);
     }
 
-    function print_barcodes($product_id = NULL)
+   function print_barcodes($product_id = NULL)
     {
+
         $this->erp->checkPermissions('print_barcodes', NULL, 'products');
         $this->form_validation->set_rules('style', lang("style"), 'required');
         if ($this->form_validation->run() == true) {
 
             $style = $this->input->post('style');
             $bci_size = ($style == 111 || $style == 119|| $style == 120 || $style == 10 || $style == 12 || $style == 90 || $style == 6 ? 50 : ($style == 14 || $style == 16 || $style == 18 ? 30 : 20));
-            
+
             $currencies = $this->site->getAllCurrencies();
             $s = isset($_POST['product_id']) ? sizeof($_POST['product_id']) : 0;
 
             if ($s < 1) {
+
                 $this->session->set_flashdata('error', lang('no_product_selected'));
                 redirect("products/print_barcodes");
             }
-            
+//            echo 'hi-'.$this->input->post('vars');
             for ($m = 0; $m < $s; $m++) {
+
                 $pid = $_POST['product_id'][$m];
                 $quantity = $_POST['quantity'][$m];
                 $product = $this->products_model->getProductWithCategory($pid);
-                if ($variants = $this->products_model->getVariantNameByArrayId($this->input->post('vars'))) {
-
+                if ($variants = $this->products_model->getVariantNameByArrayId(1)) {
                     foreach ($variants as $option) {
 
+//                        $this->erp->print_arrays($variants);
                         //if ($this->input->post('vt_'.$product->id.'_'.$option->id)) {
-                            $barcodes[] = array(
-                                'biller' => $this->input->post('biller'),
-                                'site' => $this->input->post('site_name') ? $this->Settings->site_name : FALSE,
-                                'type_p'=>$product->type,
-                                'code' => $product->code,
-                                'name' => $this->input->post('product_name') ? $product->name . ' - ' . $option->name : FALSE,
-                                'image' => $this->input->post('product_image') ? $product->image : FALSE,
-                                'barcode' => $this->product_barcode($product->code . $this->Settings->barcode_separator . $option->id, 'code128', $bci_size),
-                                'price' => $this->input->post('price') ? $this->erp->formatMoney($option->price != 0 ? $option->price : $product->price) : FALSE,
-                                'unit' => $this->input->post('unit') ? $product->unit : FALSE,
-                                'category' => $this->input->post('category') ? $product->category : FALSE,
-                                'currencies' => $this->input->post('currencies'),
-                                'variants' => $this->input->post('variants') ? $variants : FALSE,
-                                'quantity' => $quantity
-                                );
+                        $barcodes[] = array(
+                            'biller' => $this->input->post('biller'),
+                            'site' => $this->input->post('site_name') ? $this->Settings->site_name : FALSE,
+                            'code' => $product->code,
+                            'name' => $this->input->post('product_name') ? $product->name . '' : FALSE,
+                            'image' => $this->input->post('product_image') ? $product->image : FALSE,
+                            'barcode' => $this->product_barcode($product->code, 'code128', $bci_size),
+                            'price_kk' => $this->input->post('price') ? $this->erp->formatMoney($option->price != 0 ? $option->price : $product->price) : FALSE,
+                            'price' => $this->input->post('price') ? $this->erp->formatMoney($product->price) : FALSE,
+                            'unit' => $this->input->post('unit') ? $product->unit : FALSE,
+                            'category' => $this->input->post('category') ? $product->category : FALSE,
+                            'currencies' => $this->input->post('currencies'),
+                            'variants' => $this->input->post('variants') ? $variants : FALSE,
+                            'quantity' => $quantity
+                        );
 
 
                         // }
@@ -749,7 +752,7 @@ class Products extends MY_Controller
             $this->data['items'] = false;
             $this->data['cur'] = $this->products_model->getRate();
             $this->data['billers'] = $this->site->getAllCompanies('biller');
-        
+
             $bc = array(array('link' => base_url(), 'page' => lang('home')), array('link' => site_url('products'), 'page' => lang('products')), array('link' => '#', 'page' => lang('print_barcodes')));
             $meta = array('page_title' => lang('print_barcodes'), 'bc' => $bc);
             $this->page_construct('products/print_barcodes', $meta, $this->data);
@@ -824,7 +827,6 @@ class Products extends MY_Controller
             $this->page_construct('products/print_barcodes', $meta, $this->data);
         }
     }
-
     function add($id = NULL, $param = null)
     {
         $this->erp->checkPermissions('add',null,'products');
