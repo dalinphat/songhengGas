@@ -392,6 +392,7 @@ class Pos extends MY_Controller
     function index($sid = null, $sale_order_id=null, $combine_table = null)
     {
         $this->erp->checkPermissions('index');
+
         if (!$this->pos_settings->default_biller || !$this->pos_settings->default_customer || !$this->pos_settings->default_category) {
             $this->session->set_flashdata('warning', lang('please_update_settings'));
             redirect('pos/settings');
@@ -417,7 +418,7 @@ class Pos extends MY_Controller
         //$this->form_validation->set_rules('reference_nob', lang("reference_no"), 'required|is_unique[sales.reference_no]');
 
         if ($this->form_validation->run() == true){
-
+//$this->erp->print_arrays("hi");
             $quantity 			= "quantity";
             $product 			= "product";
             $unit_cost 			= "unit_cost";
@@ -989,7 +990,7 @@ class Pos extends MY_Controller
                     if($pos->auto_delivery == 1){
                         $this->sales_model->addDelivery($dlDetails);
                     }
-                    redirect("pos/view/" . $sale['sale_id']);
+                    redirect("sales/print_st_invoice_2/" . $sale['sale_id']);
                     //redirect("pos/maman_invoice/" . $sale['sale_id']);
                     //redirect("sales/invoice_st_a5/" . $sale['sale_id']);
                     //redirect("pos/view_teatry/" . $sale['sale_id']);
