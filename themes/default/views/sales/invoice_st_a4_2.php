@@ -372,8 +372,8 @@
                             if($tax>0){
                                 $colcount++;
                             }
-								if($erow<11){
-									$k=11 - $erow;
+								if($erow<10){
+									$k=10 - $erow;
 									for($j=1;$j<=$k;$j++) {
 											echo  '<tr>
 													<td height="34px" style="text-align: center; vertical-align: middle">'.$no.'</td>';
@@ -512,27 +512,36 @@
 			</div>
 			<?php } ?>
 		 </div>	<!--div col sm 6 -->
-
+        <div class="row">
+        <div class="col-sm-6 col-xs-6">
+            <p>ខ្វះសំបក​ 48kg=...... + ...... = ....... - ....... = ......</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 15kg=...... + ....... = ...... - ...... = ......</p>
+        </div>
+        <div class="col-sm-6 col-xs-6">
+            <p></p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ថ្ងៃទី................ ខែ .............. ឆ្នាំ ...............</p>
+        </div>
+        </div>
 		<div id="footer" class="row" >
-			<!--<div class="col-sm-4 col-xs-4">
+			<div class="col-sm-4 col-xs-4" style="margin-top: 30px !important;">
 				<center>
 					<hr style="margin:0; border:1px solid #000; width: 80%">
-					<p style="font-size: 12px; margin-top: 4px !important">ហត្ថលេខា និងឈ្មោះអ្នករៀបចំ</p>
-					<p style="margin-top:-10px; font-size: 12px">Prepared's Signature & Name</p>
-				</center>
-			</div>-->
-			<div class="col-sm-6 col-xs-6" style="margin-top: 50px !important;">
-				<center>
-					<hr style="margin:0; border:1px solid #000; width: 80%">
-					<p style="font-size: 12px; margin-top: 4px !important">ហត្ថលេខា និងឈ្មោះអ្នកលក់</p>
-					<p style="margin-top:-10px; font-size: 12px">Seller's Signature & Name</p>
+					<p style="font-size: 12px; margin-top: 4px !important">អ្នកទិញ រី ទំនិញ</p>
+<!--					<p style="margin-top:-10px; font-size: 12px">Prepared's Signature & Name</p>-->
 				</center>
 			</div>
-			<div class="col-sm-6 col-xs-6" style="margin-top: 50px !important;">
+			<div class="col-sm-4 col-xs-4" style="margin-top: 30px !important;">
 				<center>
 					<hr style="margin:0; border:1px solid #000; width: 80%">
-					<p style="font-size: 12px; margin-top: 4px !important">ហត្ថលេខា និងឈ្មោះអ្នកទិញ</p>
-					<p style="margin-top:-10px; font-size: 12px">Customer's Signature & Name</p>
+					<p style="font-size: 12px; margin-top: 4px !important">អ្នកដឹក</p>
+<!--					<p style="margin-top:-10px; font-size: 12px">Seller's Signature & Name</p>-->
+				</center>
+			</div>
+			<div class="col-sm-4 col-xs-4" style="margin-top: 30px !important;">
+				<center>
+					<hr style="margin:0; border:1px solid #000; width: 80%">
+					<p style="font-size: 12px; margin-top: 4px !important">អ្នកលក់ រី អ្នកប្រគល់</p>
+
 				</center>
 			</div>
 		</div>

@@ -570,29 +570,37 @@
                                 </div>
                                 <br><br><br><br>
                             <?php } ?>
-                            <div class="clear-both">
-                                <div style="width:100%;height:70px"></div>
-                            </div>
-                            <div id="footer" class="row" >
-                                <!--<div class="col-sm-4 col-xs-4">
-                                    <center>
-                                        <hr style="margin:0; border:1px solid #000; width: 80%">
-                                        <p style=" margin-top: 4px !important">ហត្ថលេខា និងឈ្មោះអ្នករៀបចំ</p>
-                                        <p style="margin-top:-10px;">Prepared's Signature & Name</p>
-                                    </center>
-                                </div>-->
+
+                            <div class="row">
                                 <div class="col-sm-6 col-xs-6">
-                                    <center>
-                                        <hr style="margin:0; border:1px solid #000; width: 80%">
-                                        <p style="margin-top: 4px !important">ហត្ថលេខា និងឈ្មោះអ្នកលក់</p>
-                                        <p style="margin-top:-10px;">Seller's Signature & Name</p>
-                                    </center>
+                                    <p>ខ្វះសំបក​ 48kg=...... + ...... = ....... - ....... = ......</p>
+                                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 15kg=...... + ....... = ...... - ...... = ......</p>
                                 </div>
                                 <div class="col-sm-6 col-xs-6">
+                                    <p></p>
+                                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ថ្ងៃទី................ ខែ .............. ឆ្នាំ ...............</p>
+                                </div>
+                            </div>
+                            <div id="footer" class="row" >
+                                <div class="col-sm-4 col-xs-4" style="margin-top: 30px !important;">
                                     <center>
                                         <hr style="margin:0; border:1px solid #000; width: 80%">
-                                        <p style=" margin-top: 4px !important">ហត្ថលេខា និងឈ្មោះអ្នកទិញ</p>
-                                        <p style="margin-top:-10px; ">Customer's Signature & Name</p>
+                                        <p style="font-size: 12px; margin-top: 4px !important">អ្នកទិញ រី ទំនិញ</p>
+                                        <!--					<p style="margin-top:-10px; font-size: 12px">Prepared's Signature & Name</p>-->
+                                    </center>
+                                </div>
+                                <div class="col-sm-4 col-xs-4" style="margin-top: 30px !important;">
+                                    <center>
+                                        <hr style="margin:0; border:1px solid #000; width: 80%">
+                                        <p style="font-size: 12px; margin-top: 4px !important">អ្នកដឹក</p>
+                                        <!--					<p style="margin-top:-10px; font-size: 12px">Seller's Signature & Name</p>-->
+                                    </center>
+                                </div>
+                                <div class="col-sm-4 col-xs-4" style="margin-top: 30px !important;">
+                                    <center>
+                                        <hr style="margin:0; border:1px solid #000; width: 80%">
+                                        <p style="font-size: 12px; margin-top: 4px !important">អ្នកលក់ រី អ្នកប្រគល់</p>
+
                                     </center>
                                 </div>
                             </div>
