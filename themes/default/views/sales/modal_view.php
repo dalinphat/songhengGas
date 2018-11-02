@@ -575,7 +575,7 @@
                                 <span class="hidden-sm hidden-xs"><?= lang('knk_group') ?></span>
                             </a>
                         </div>-->
-                        <div class="btn-group">
+                        <!--<div class="btn-group">
                             <a href="<?= site_url('sale_order/delivery_noted/' . $inv->id) ?>" target="_blank" class="tip btn btn-primary" title="<?= lang('tax_invoice') ?>">
                                 <i class="fa fa-download"></i>
                                 <span class="hidden-sm hidden-xs"><?= lang('delivery_noted') ?></span>
@@ -586,9 +586,9 @@
                                 <i class="fa fa-download"></i>
                                 <span class="hidden-sm hidden-xs"><?= lang('tax_invoice') ?></span>
                             </a>
-                        </div>
+                        </div>-->
                         <div class="btn-group">
-                            <a href="<?= site_url('sales/tax_invoice_cysparma/' . $inv->id) ?>" target="_blank" class="tip btn btn-primary" title="<?= lang('tax_invoice') ?>">
+                            <a href="<?= site_url('sales/tax_invoice_cysparma/' . $inv->id) ?>" target="_blank" class="tip btn btn-primary" title="<?= lang('tax_invoice_cysparma') ?>">
                                 <i class="fa fa-download"></i>
                                 <span class="hidden-sm hidden-xs"><?= lang('tax_invoice_cysparma') ?></span>
                             </a>

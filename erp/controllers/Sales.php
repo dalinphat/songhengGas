@@ -607,7 +607,7 @@ class Sales extends MY_Controller
         $add_payment_link           = anchor('sales/add_payment/$1', '<i class="fa fa-money"></i> ' . lang('add_payment'), 'data-toggle="modal" data-target="#myModal"');
         $add_delivery_link          = anchor('sales/add_delivery/$1', '<i class="fa fa-truck"></i> ' . lang('add_delivery'), 'data-toggle="modal" data-target="#myModal"');
         $email_link                 = anchor('sales/email/$1', '<i class="fa fa-envelope"></i> ' . lang('email_sale'), 'data-toggle="modal" data-target="#myModal"');
-        $assign_to                  = anchor('sales/assign_to_user/$1', '<i class="fa fa-check"></i> ' . lang('assign_to_user'),'data-toggle="modal" data-target="#myModal"');
+        //$assign_to                  = anchor('sales/assign_to_user/$1', '<i class="fa fa-check"></i> ' . lang('assign_to_user'),'data-toggle="modal" data-target="#myModal"');
    	    $edit_link                  = anchor('sales/edit/$1', '<i class="fa fa-edit"></i> ' . lang('edit_sale'), 'class="sledit"');
         $duplicate_link             = anchor('sales/add/0/0/0/$1', '<i class="fa fa-copy"></i> ' . lang('duplicate_sale'), 'class="slduplicate"');
         //$pdf_link                 = anchor('sales/pdf/$1', '<i class="fa fa-file-pdf-o"></i> ' . lang('download_pdf'));
@@ -622,8 +622,7 @@ class Sales extends MY_Controller
                                     . '<button type="button" class="btn btn-default btn-xs btn-primary dropdown-toggle" data-toggle="dropdown">'
                                     . lang('actions') . ' <span class="caret"></span></button>
                                     <ul class="dropdown-menu pull-right" role="menu">
-                                        <li>' . $detail_link . '</li>
-                                        <li>' . $assign_to. '</li>'
+                                        <li>' . $detail_link . '</li>'
 
                                         .(($this->Owner || $this->Admin) ? '<li>'.$payments_link.'</li>' : ($this->GP['sales-payments'] ? '<li>'.$payments_link.'</li>' : '')).
                                         (($this->Owner || $this->Admin) ? '<li>'.$add_payment_link.'</li>' : ($this->GP['sales-payments'] ? '<li>'.$add_payment_link.'</li>' : ''))
