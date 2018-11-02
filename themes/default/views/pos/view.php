@@ -516,7 +516,7 @@ if ($modal) {
                             <?php
 
                             foreach($payments as $payment) {
-								
+
                                 if($payment->pos_paid>0){
 
                                     ?>
@@ -746,7 +746,7 @@ if ($modal) {
             <?= $inv->staff_note ? '<p class="no-print"><strong>' . lang('staff_note') . ':</strong> ' . $this->erp->decode_html($inv->staff_note) . '</p>' : ''; ?>
 
         </div>
-        <?php $this->erp->qrcode('link', urlencode(site_url('pos/view/' . $inv->id)), 2); ?>
+
         <div class="text-center">
 	    </div>
         <?php $br = $this->erp->save_barcode($inv->reference_no, 'code39'); ?>
@@ -761,6 +761,12 @@ if ($modal) {
 
             </table>
         </div>
+    <div class="btn-group">
+        <a href="<?= site_url('sales/print_st_invoice_2/' . $inv->id) ?>" target="_blank" class="tip btn btn-primary" title="<?= lang('invoice_st_a5') ?>">
+            <i class="fa fa-print"></i>
+            <span class="hidden-sm hidden-xs"><?= lang('invoice_st_a5') ?></span>
+        </a>
+    </div>
 
         <div style="clear:both;"></div>
 
