@@ -10,7 +10,7 @@
 </head>
 <style>
 	body {
-		font-size: 12px !important;
+		font-size: 10px !important;
 	}
 		
 	.container {
@@ -31,11 +31,14 @@
 
 
     @media print {
+        body{
+            font-size: 9px !important;
+        }
 		.pageBreak {
 			page-break-after: always;
 		}
 		.container {
-			height: 20.5cm !important;
+			height: 20cm !important;
             margin-left: -11px !important;
 
 		}
@@ -48,7 +51,7 @@
 		}
 
 		.row table tr td {
-			font-size: 12px !important;
+			font-size: 10px !important;
 		}
 
 		.table thead > tr > th, .table tbody > tr > th, .table tfoot > tr > th {
@@ -57,7 +60,7 @@
 		}
 		
 		.row .col-xs-7 table tr td, .col-sm-5 table tr td{
-			font-size: 12px !important;
+			font-size: 10px !important;
 		}
 		#note{
 				max-width: 95% !important;
@@ -83,7 +86,7 @@
 	.company_addr h3:nth-child(2) {
 		margin-top:-2px !important;
 		//padding-left: 130px !important;
-		font-size: 26px !important;
+		font-size: 20px !important;
 		font-weight: bold;
 	}
 	
@@ -93,7 +96,7 @@
 	}
 	
 	.company_addr p {
-		font-size: 12px !important;
+		font-size: 10px !important;
 		margin-top:-10px !important;
 		padding-left: 20px !important;
 	}
@@ -105,7 +108,7 @@
 	
 	.inv h4:last-child {
 		margin-top:-5px !important;
-		font-size: 12px !important;
+		font-size: 10px !important;
 	}
 
 	button {
@@ -114,7 +117,7 @@
     .header{
         font-family:"Khmer OS Muol Light";
         -moz-font-family: "Khmer OS System";
-        font-size: 18px;
+        font-size: 16px;
     }
 	
 </style>
@@ -131,13 +134,13 @@
 <body>
 	<div class="container" style="margin: 0 auto;">
 		<div class="col-xs-12" style="padding: 0">
-			<div class="row" style="margin-top: 20px !important;">
+			<div class="row" style="margin-top: 5px !important;">
                 <div class="col-sm-3 col-xs-3 " style="margin-top: 0px !important;">
                     <?php if(!empty($biller->logo)) { ?>
-                        <img class="img-responsive myhide" src="<?= base_url() ?>assets/uploads/logos/<?= $biller->logo; ?>"id="hidedlo" style="width: 140px; margin-top: -10px;" />
+                        <img class="img-responsive myhide" src="<?= base_url() ?>assets/uploads/logos/<?= $biller->logo; ?>"id="hidedlo" style="width: 140px; margin-top: -0px;" />
                     <?php } ?>
                 </div>
-                <div  class="col-sm-7 col-xs-7 company_addr "  style="margin-top: -20px !important;margin-left:-20px !important;">
+                <div  class="col-sm-7 col-xs-7 company_addr "  style="margin-top: -25px !important;margin-left:-10px !important;">
                     <div class="myhide">
                         <center >
                             <?php if($biller->company) { ?>
@@ -146,15 +149,15 @@
 
                             <div style="margin-top: 15px;">
                                 <?php if(!empty($biller->vat_no)) { ?>
-                                    <p style="font-size: 12px !important;">លេខអត្តសញ្ញាណកម្ម អតប (VAT No):&nbsp;<?= $biller->vat_no; ?></p>
+                                    <p style="font-size: 10px !important;">លេខអត្តសញ្ញាណកម្ម អតប (VAT No):&nbsp;<?= $biller->vat_no; ?></p>
                                 <?php } ?>
 
                                 <?php if(!empty($biller->address)) { ?>
-                                    <p style="margin-top:-10px !important;font-size: 12px !important;">អាសយដ្ឋាន ៖ &nbsp;<?= $biller->address; ?></p>
+                                    <p style="margin-top:-20px !important;font-size: 10px !important;">អាសយដ្ឋាន ៖ &nbsp;<?= $biller->address; ?></p>
                                 <?php } ?>
 
                                 <?php if(!empty($biller->phone)) { ?>
-                                    <p style="margin-top:-10px ;font-size: 12px !important;">ទូរស័ព្ទលេខ (Tel):&nbsp;<?= $biller->phone; ?></p>
+                                    <p style="margin-top:-20px ;font-size: 10px !important;">ទូរស័ព្ទលេខ (Tel):&nbsp;<?= $biller->phone; ?></p>
                                 <?php } ?>
 
                                 <?php if(!empty($biller->email)) { ?>
@@ -221,13 +224,7 @@
                                 <?php } ?>
                             </tr>
                         <?php } ?>
-                        <?php if(!empty($customer->address_kh || $customer->address)) { ?>
-                            <tr>
-                                <td>ទូរស័ព្ទលេខ </td>
-                                <td>:</td>
-                                <td><?= $customer->phone ?></td>
-                            </tr>
-                        <?php } ?>
+
                         <?php if(!empty($customer->vat_no)) { ?>
                             <tr>
                                 <td style="width: 20% !important">លេខអត្តសញ្ញាណកម្ម អតប </td>
@@ -254,6 +251,13 @@
                             <td>:</td>
                             <td><?= $invs->saleman; ?></td>
                         </tr>
+                        <?php if(!empty($customer->address_kh || $customer->address)) { ?>
+                            <tr>
+                                <td>ទូរស័ព្ទលេខ </td>
+                                <td>:</td>
+                                <td><?= $customer->phone ?></td>
+                            </tr>
+                        <?php } ?>
                         <?php if ($invs->payment_term) { ?>
                             <tr>
                                 <td>រយៈពេលបង់ប្រាក់ </td>
@@ -285,8 +289,8 @@
 			?>
 			<div class="row">
 				<div class="col-sm-12 col-xs-12">
-					<table class="table table-bordered" style="width: 100%; margin-top: 10px;">
-						<tbody style="font-size: 12px;">
+					<table class="table table-bordered" style="width: 100%; margin-top: 8px;">
+						<tbody style="font-size: 10px;">
 							<tr class="thead" style="background-color: #444 !important; color: #FFF !important;">
 								<th>ល.រ<br /><?= strtoupper(lang('no')) ?></th>
 								<th>បរិយាយមុខទំនិញ<br /><?= strtoupper(lang('description')) ?></th>
@@ -372,8 +376,8 @@
                             if($tax>0){
                                 $colcount++;
                             }
-								if($erow<10){
-									$k=10 - $erow;
+								if($erow<9){
+									$k=9 - $erow;
 									for($j=1;$j<=$k;$j++) {
 											echo  '<tr>
 													<td height="34px" style="text-align: center; vertical-align: middle">'.$no.'</td>';
@@ -507,8 +511,8 @@
 				</div>
 			</div>
 			<?php if($invs->note){ ?>
-			<div style="border-radius: 5px 5px 5px 5px;border:1px solid black;font-size: 10px !important;margin-top: 10px;height: auto;" id="note" class="col-md-12 col-xs-12">
-				<p style="margin-left: 10px;margin-top:10px;"><?php echo strip_tags($invs->note); ?></p>
+			<div style="border-radius: 5px 5px 5px 5px;border:1px solid black;font-size: 10px !important;margin-top: 5px;height: auto;" id="note" class="col-md-12 col-xs-12">
+				<p style="margin-left: 10px;margin-top:5px;"><?php echo strip_tags($invs->note); ?></p>
 			</div>
 			<?php } ?>
 		 </div>	<!--div col sm 6 -->
@@ -516,28 +520,30 @@
         <div class="col-sm-6 col-xs-6">
             <p>ខ្វះសំបក​ 48kg=...... + ...... = ....... - ....... = ......</p>
             <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 15kg=...... + ....... = ...... - ...... = ......</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 5kg=...... + ....... = ...... - ...... = ......</p>
         </div>
         <div class="col-sm-6 col-xs-6">
             <p></p>
             <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ថ្ងៃទី................ ខែ .............. ឆ្នាំ ...............</p>
         </div>
+
         </div>
 		<div id="footer" class="row" >
-			<div class="col-sm-4 col-xs-4" style="margin-top: 30px !important;">
+			<div class="col-sm-4 col-xs-4" style="margin-top: 20px !important;">
 				<center>
 					<hr style="margin:0; border:1px solid #000; width: 80%">
-					<p style="font-size: 12px; margin-top: 4px !important">អ្នកទិញ រី ទំនិញ</p>
+					<p style="font-size: 10px; margin-top: 4px !important">អ្នកទិញ រី ទំនិញ</p>
 <!--					<p style="margin-top:-10px; font-size: 12px">Prepared's Signature & Name</p>-->
 				</center>
 			</div>
-			<div class="col-sm-4 col-xs-4" style="margin-top: 30px !important;">
+			<div class="col-sm-4 col-xs-4" style="margin-top: 20px !important;">
 				<center>
 					<hr style="margin:0; border:1px solid #000; width: 80%">
 					<p style="font-size: 12px; margin-top: 4px !important">អ្នកដឹក</p>
 <!--					<p style="margin-top:-10px; font-size: 12px">Seller's Signature & Name</p>-->
 				</center>
 			</div>
-			<div class="col-sm-4 col-xs-4" style="margin-top: 30px !important;">
+			<div class="col-sm-4 col-xs-4" style="margin-top: 20px !important;">
 				<center>
 					<hr style="margin:0; border:1px solid #000; width: 80%">
 					<p style="font-size: 12px; margin-top: 4px !important">អ្នកលក់ រី អ្នកប្រគល់</p>
